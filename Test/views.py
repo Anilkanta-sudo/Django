@@ -9,6 +9,8 @@ from .models import activities
 import json
 from datetime import datetime
 
+f = member.objects.filter().values_list('id', flat=True)
+
 
 # Create your views here.
 @api_view(["POST"])
@@ -16,10 +18,12 @@ def add_meb_time(request):
     if request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        tbl = member()
-        tbl.name = body['name']
-        tbl.tz = body['tz']
-        tbl.save()
+        m = [i for i in f]
+        if int(body['user_id']) not in m:
+            tbl = member()
+            tbl.name = body['name']
+            tbl.tz = body['tz']
+            tbl.save()
         tbl1 = activities()
         tbl1.user_id_id = body['user_id']
         tbl1.end_time = body['end_time']

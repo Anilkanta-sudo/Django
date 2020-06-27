@@ -19,7 +19,7 @@ from Test import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('list', views.show_list),
+    path('', views.show_list),
     path('add_meb', views.add_meb_time),
 
 
